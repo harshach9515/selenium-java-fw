@@ -1,0 +1,39 @@
+services:
+  selenium-hub:
+    image: selenium/hub:4.13.0
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+
+  chrome-node:
+    image: selenium/node-chrome:4.13.0
+    container_name: chrome-node
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    shm_size: "2g"
+
+  healenium-backend:
+    image: healenium/hlm-backend:3.4.0
+    container_name: healenium-backend
+    depends_on:
+      - selenium-hub
+    ports:
+      - "7878:7878"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://healenium-db:5432/healenium
+      - SPRING_DATASOURCE_USERNAME=healenium
+      - SPRING_DATASOURCE_PASSWORD=healenium
+
+  healenium-db:
+    image: postgres:13
+    container_name: healenium-db
+    environment:
+      - POSTGRES_DB=healenium
+      - POSTGRES_USER=healenium
+      - POSTGRES_PASSWORD=healenium
+    ports:
+      - "5432:5432"

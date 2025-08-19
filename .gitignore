@@ -1,0 +1,35 @@
+# Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Eclipse/IntelliJ
+/.idea/
+/*.iml
+/.classpath
+/.project
+/.settings/
+
+# Maven/Gradle
+/target/
+/build/
+/out/
+/.gradle/
+/.gradle-cache/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Selenium / Test outputs
+/screenshots/
+/reports/
+/test-output/
+
+# Environment files
+/config.properties
+/testdata.json
