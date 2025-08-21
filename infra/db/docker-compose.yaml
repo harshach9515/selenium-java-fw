@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  postgres-db:
+    image: postgres:11-alpine   # recommended for Healenium
+    container_name: postgres-db
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./db/sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: healenium
+      POSTGRES_USER: healenium_user
+      POSTGRES_PASSWORD: YDk2nmNs4s9aCP6K
+    networks:
+      - healenium
+
+  healenium:
+    image: healenium/hlm-backend:3.4.6
+    container_name: healenium
+    restart: on-failure
+    ports:
+      - "7878:7878"
+    depends_on:
+      - postgres-db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/healenium
+      SPRING_DATASOURCE_USERNAME: healenium_user
+      SPRING_DATASOURCE_PASSWORD: YDk2nmNs4s9aCP6K
+      COLLECT_METRICS: "true"
+      HLM_LOG_LEVEL: info
+    volumes:
+      - ./screenshots/:/screenshots
+      - ./logs/:/logs
+    networks:
+      - healenium
+
+  selector-imitator:
+    image: healenium/hlm-selector-imitator:1.4
+    container_name: selector-imitator
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    depends_on:
+      - healenium
+    networks:
+      - healenium
+networks:
+  healenium:
+    driver: bridge

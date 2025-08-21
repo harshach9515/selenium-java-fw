@@ -13,12 +13,15 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import com.utils.ConfigReader;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class BrowserFactory {
 
 	protected static WebDriver createLocalDriver(BrowserType browser) {
 		try {
 			switch (browser) {
 			case CHROME:
+				 //WebDriverManager.chromedriver().setup();
 				return new ChromeDriver(BrowserOptions.getChromeOptions());
 			case FIREFOX:
 				return new FirefoxDriver(BrowserOptions.getFirefoxOptions());

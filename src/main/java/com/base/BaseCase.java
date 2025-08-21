@@ -14,6 +14,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.reports.Report;
+
 public class BaseCase {
 	protected WebDriver driver;
 	protected WebDriverWait wait;
@@ -29,6 +31,7 @@ public class BaseCase {
 		try {
 			driver.get(url);
 			log.info("Navigated to URL: " + url);
+			Report.info("Navigated to URL: " + url);
 		} catch (Exception e) {
 			log.error("goTo() failed | URL: " + url + " | Error: " + e.getMessage(), e);
 			throw new RuntimeException("goTo() failed: " + e.getMessage(), e);
@@ -41,6 +44,7 @@ public class BaseCase {
 			element.clear();
 			element.sendKeys(text);
 			log.info("sendText() successful | Text: '" + text + "' | Element: " + element);
+			Report.info("Enter text : " +text);
 		} catch (Exception e) {
 			log.error("sendText() failed | Text: '" + text + "' | Element: " + element + " | Error: " + e.getMessage(),
 					e);
@@ -52,6 +56,7 @@ public class BaseCase {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(element)).click();
 			log.info("click() successful | Element: " + element);
+			Report.info("Click on :"+ element);
 		} catch (Exception e) {
 			log.error("click() failed | Element: " + element + " | Error: " + e.getMessage(), e);
 			throw new RuntimeException("click() failed: " + e.getMessage(), e);

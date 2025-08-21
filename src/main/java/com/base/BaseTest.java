@@ -21,16 +21,12 @@ public class BaseTest {
 		try {
 			DriverManager.initDriver(browser);
 			log.info("Driver created successfully for test: " + method.getName());
-
+			
 			testData = TestDataManager.getDataForTest(method.getName());
 		} catch (Exception e) {
 			log.error("Driver creation failed: " + e.getMessage(), e);
 			e.printStackTrace();
 		}
-	}
-
-	public DriverManager getDriverManager() {
-		return new DriverManager();
 	}
 
 	public org.openqa.selenium.WebDriver getDriver() {

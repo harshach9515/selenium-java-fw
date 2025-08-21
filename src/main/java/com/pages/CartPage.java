@@ -33,6 +33,7 @@ public class CartPage extends BaseCase{
 			Reporter.log("Cart Page is displayed");
 		} catch (Throwable e) {
 			Reporter.log("CartPage failed to load : " + e.getMessage());
+			log.error("CartPage failed to load : " + e.getMessage());
 			throw e;
 		}
 	}
