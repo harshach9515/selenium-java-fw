@@ -23,7 +23,7 @@ git clone https://github.com/harshach9515/selenium-java-fw.git
 cd selenium-java-fw
 
 ## Run Tests
-mvn run test
+mvn clean test
 run testng suite - src/test/resources/testsuites/testng.xml
 
 
