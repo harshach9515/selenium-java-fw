@@ -32,7 +32,7 @@ public class BaseTest {
 	public org.openqa.selenium.WebDriver getDriver() {
 		return DriverManager.getDriver();
 	}
-
+	
 
 	@AfterMethod
 	public void tearDown(Method method) {
